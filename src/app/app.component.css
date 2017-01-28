@@ -1,0 +1,27 @@
+body {
+    font-family: Arial;
+}
+
+h1 {
+    font-family: Arial;
+}
+
+.large {
+    font-size: 150%;
+}
+
+.max-width-500 {
+    max-width: 500px;
+}
+
+.max-width-400 {
+    max-width: 400px;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+label {
+    font-style: normal !important;
+}

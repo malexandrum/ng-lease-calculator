@@ -1,3 +1,87 @@
-<h1>
-  {{title}}
-</h1>
+<div class="max-width-400 center-block">
+  <h3>
+    <span class="glyphicon glyphicon-road"></span> {{title}}
+  </h3>
+  <form (change)="onChange()">
+    <div id="contract-edit" *ngIf="editContractMode">
+      <div class="form-group">
+        <label for="leaseDate">Lease Date
+      
+      </label>
+        <input class="form-control" [(ngModel)]="leaseDateString" id="leaseDate" type="date" [ngModelOptions]="{standalone: true}"
+          placeholder="Lease start date" />
+      </div>
+      <div class="form-group">
+        <label for="leaseMonths">Lease Months      
+      </label>
+        <div class="input-group">
+          <input class="form-control" id="leaseMonths" [(ngModel)]="leaseMonths" type="number" [ngModelOptions]="{standalone: true}"
+            placeholder="Contract is for X months" /><span class="input-group-addon">months</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="costPerMile">Cost Per Extra Mile      
+        </label>
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          <input class="form-control" id="costPerMile" [(ngModel)]="costPerMile" type="number" [ngModelOptions]="{standalone: true}"
+            placeholder="Cost per mile" /></div>
+      </div>
+      <div class="form-group">
+        <label for="milesPerYear">Miles Per Year      
+      </label>
+        <div class="input-group">
+          <input class="form-control" id="milesPerYear" [(ngModel)]="milesPerYear" type="number" [ngModelOptions]="{standalone: true}" placeholder="Contracted miles per year"
+          />
+          <span class="input-group-addon">miles</span>
+        </div>
+      </div>
+      <div>
+        <button type="button" (click)="saveContract()" class="btn btn-primary">Save Contract</button>
+      </div><br>
+    </div>
+
+    <div id="contract-display" *ngIf="!editContractMode">
+      <div>
+        <label>Lease Date:     
+        </label>
+        <span>{{leaseDateString}}</span>
+      </div>
+      <div>
+        <label>Lease Months:          
+        </label>
+        <span>{{leaseMonths}}</span>
+      </div>
+      <div>
+        <label>Cost Per Extra Mile:          
+        </label>
+        <span>${{costPerMile | number:'1.2-2'}}</span>
+      </div>
+      <div>
+        <label>Miles Per Year:          
+        </label>
+        <span>{{milesPerYear}}</span>
+      </div>
+
+      <div>
+        <button type="button" (click)="editContract()" class="btn btn-primary">Edit Contract</button>
+      </div><br>
+
+      <div class="form-group">
+        <label>Odometer Reading
+        <div class="input-group">
+      <input class="form-control" [(ngModel)]="currentMiles" #odometerReading type="number" [ngModelOptions]="{standalone: true}" placeholder="Current miles"
+      />
+      <span class="input-group-addon">miles</span>
+      </div>
+      </label>
+      </div>
+
+      <div><label>Estimated miles at end of contract: </label><span class="">{{estimatedMilesEnd | number: '1.0-0'}}</span></div>
+      <div><label>Estimated Due (End of Contract): </label><span>{{estimatedExtraPayment | currency:'USD':'$':'1.0-0' }}</span></div>
+      <div><label>Percentage: </label><span class="">{{percentage | percent:'2.0-0'}}</span></div>
+    </div>
+
+
+  </form>
+</div>
