@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Select2OptionData } from 'ng2-select2';
+import { } from 'jquery';
+
+import { LEASEMONTHSOPTIONS } from './lease-months-options';
+import { COST_PER_MILE_OPTIONS } from './cost-per-mile-options';
+import { MILESPERYEAROPTIONS } from './miles-per-year-options'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   title: string;
   leaseDate: Date;
@@ -20,6 +26,12 @@ export class AppComponent {
   estimatedExtraPayment: number;
   percentage: number;
   editContractMode: boolean;
+  // lmos = LEASEMONTHSOPTIONS;
+  // costPerMileOptions = COST_PER_MILE_OPTIONS;
+  // milesPerYearOptions = MILESPERYEAROPTIONS;
+  public lmos2: Array<Select2OptionData>;
+  public costPerMileOptions: Array<Select2OptionData>;
+  public milesPerYearOptions: Array<Select2OptionData>;
 
   constructor() {
     this.title = 'Auto Lease Miles Calculator';
@@ -45,6 +57,7 @@ export class AppComponent {
       this.editContractMode = false;
     }
 
+
   }
   onChange(): void {
     const thisMoment: Date = new Date();
@@ -59,7 +72,7 @@ export class AppComponent {
     this.setCookie('leaseDate', this.leaseDateString ? this.leaseDateString : '', 1825);
     this.setCookie('leaseMonths', this.leaseMonths ? this.leaseMonths.toString() : '', 1825);
     this.setCookie('costPerMile', this.costPerMile ? this.costPerMile.toString() : '', 1825);
-    this.setCookie('milesPerYear', this.milesPerYear ? this.milesPerYear.toString() : '', 1825);        
+    this.setCookie('milesPerYear', this.milesPerYear ? this.milesPerYear.toString() : '', 1825);
 
   }
   editContract(): void {
@@ -87,4 +100,28 @@ export class AppComponent {
     }
     return null;
   }
+
+  ngOnInit() {
+    this.lmos2 = [
+      {
+        id: '12',
+        text: '12 months'
+      },
+      {
+        id: '24',
+        text: '24 months'
+      },
+      {
+        id: '36',
+        text: '36 months'
+      },
+      {
+        id: '39',
+        text: '39 months'
+      }
+    ]
+  }
+
+
 }
+

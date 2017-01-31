@@ -8,8 +8,11 @@
         <label for="leaseDate">Lease Date
       
       </label>
-        <input class="form-control" [(ngModel)]="leaseDateString" id="leaseDate" type="date" [ngModelOptions]="{standalone: true}"
-          placeholder="Lease start date" />
+        <div class="input-group">
+          <input class="form-control" [(ngModel)]="leaseDateString" id="leaseDate" type="date" [ngModelOptions]="{standalone: true}"
+            placeholder="mm/dd/yyyy" />
+          <span class="input-group-addon">mm/dd/yyyy</span>
+        </div>
       </div>
       <div class="form-group">
         <label for="leaseMonths">Lease Months      
@@ -17,23 +20,40 @@
         <div class="input-group">
           <input class="form-control" id="leaseMonths" [(ngModel)]="leaseMonths" type="number" [ngModelOptions]="{standalone: true}"
             placeholder="Contract is for X months" /><span class="input-group-addon">months</span>
+          <!--<datalist id="lmos">
+
+            <option *ngFor="let lmo of lmos2" value="{{lmo.value}}">
+              {{lmo.label}}
+            </option>
+          </datalist>-->
         </div>
+        <select2 [data]="lmos2"></select2>
       </div>
       <div class="form-group">
         <label for="costPerMile">Cost Per Extra Mile      
         </label>
         <div class="input-group">
           <span class="input-group-addon">$</span>
-          <input class="form-control" id="costPerMile" [(ngModel)]="costPerMile" type="number" [ngModelOptions]="{standalone: true}"
-            placeholder="Cost per mile" /></div>
+          <input class="form-control" list="cpmos" id="costPerMile" [(ngModel)]="costPerMile" type="number" [ngModelOptions]="{standalone: true}"
+            placeholder="Cost per mile" />
+          <datalist id="cpmos">
+            <option *ngFor="let cpmo of costPerMileOptions" value="{{cpmo.value}}">
+              {{cpmo.value | currency:'USD':'$':'1.2-2'}}
+            </option>
+          </datalist>
+        </div>
+
       </div>
       <div class="form-group">
         <label for="milesPerYear">Miles Per Year      
       </label>
         <div class="input-group">
-          <input class="form-control" id="milesPerYear" [(ngModel)]="milesPerYear" type="number" [ngModelOptions]="{standalone: true}" placeholder="Contracted miles per year"
-          />
+          <input class="form-control" list="milesPerYearOptions" id="milesPerYear" [(ngModel)]="milesPerYear" type="number" [ngModelOptions]="{standalone: true}"
+            placeholder="Contracted miles per year" />
           <span class="input-group-addon">miles</span>
+          <datalist id="milesPerYearOptions">
+            <option *ngFor="let milesPerYear of milesPerYearOptions" value="{{milesPerYear}}">{{milesPerYear}}</option>
+          </datalist>
         </div>
       </div>
       <div>
