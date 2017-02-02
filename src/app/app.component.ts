@@ -21,6 +21,8 @@ export class AppComponent implements OnInit {
   milesPerYear: number;
   currentMiles: number;
   daysPassed: number;
+  milesPerDay: number;
+  daysToPause: number;
   currentMilesLimit: number;
   estimatedMilesEnd: number;
   estimatedExtraPayment: number;
@@ -64,10 +66,16 @@ export class AppComponent implements OnInit {
     this.leaseDate = new Date(this.leaseDateString);
 
     this.daysPassed = (+thisMoment - +this.leaseDate) / 1000 / 60 / 60 / 24;
+    console.log('days passed: ' + this.daysPassed);
     this.currentMilesLimit = this.daysPassed * this.milesPerYear / 365;
-    this.estimatedMilesEnd = (this.leaseMonths * 30) * this.currentMiles / this.daysPassed;
+    this.estimatedMilesEnd = (this.leaseMonths * 30.4) * this.currentMiles / this.daysPassed;
     this.estimatedExtraPayment = (this.estimatedMilesEnd - this.milesPerYear * (this.leaseMonths / 12)) * this.costPerMile;
     this.percentage = this.currentMiles / this.currentMilesLimit;
+    this.milesPerDay = this.currentMiles / this.daysPassed;
+    if (this.percentage > 1) {
+      // this.daysToPause = this.leaseMonths * 30 - this.daysPassed - ()
+      this.daysToPause = (this.estimatedMilesEnd - this.milesPerYear * this.leaseMonths / 12) / this.milesPerDay;
+    }
 
     this.setCookie('leaseDate', this.leaseDateString ? this.leaseDateString : '', 1825);
     this.setCookie('leaseMonths', this.leaseMonths ? this.leaseMonths.toString() : '', 1825);

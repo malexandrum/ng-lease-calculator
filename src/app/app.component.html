@@ -20,14 +20,14 @@
         <div class="input-group">
           <input class="form-control" id="leaseMonths" [(ngModel)]="leaseMonths" type="number" [ngModelOptions]="{standalone: true}"
             placeholder="Contract is for X months" /><span class="input-group-addon">months</span>
-          <!--<datalist id="lmos">
+          <datalist id="lmos">
 
             <option *ngFor="let lmo of lmos2" value="{{lmo.value}}">
               {{lmo.label}}
             </option>
-          </datalist>-->
+          </datalist>
         </div>
-        <select2 [data]="lmos2"></select2>
+        <!--<select2 [data]="lmos2"></select2>-->
       </div>
       <div class="form-group">
         <label for="costPerMile">Cost Per Extra Mile      
@@ -96,10 +96,15 @@
       </div>
       </label>
       </div>
+      
+      <div *ngIf="milesPerYear"><label>At end of contract you should be below&nbsp;</label><span class="">{{milesPerYear * leaseMonths / 12 | number: '1.0-0'}} miles</span></div>
+      <div *ngIf="estimatedMilesEnd"><label>Estimated at end of contract: </label><span class=""> {{estimatedMilesEnd | number: '1.0-0'}} miles</span></div>
+      <div *ngIf="estimatedExtraPayment > 0"><label>Extra payment estimated: </label><span> {{estimatedExtraPayment | currency:'USD':'$':'1.0-0' }}</span></div>
+      <div *ngIf="percentage"><label>Percentage: </label><span class=""> {{percentage | percent:'2.0-0'}}</span></div>
+      <div *ngIf="milesPerDay"><label>Average miles daily: </label><span class=""> {{milesPerDay | number:'1.0-0'}}</span></div>
 
-      <div><label>Estimated miles at end of contract: </label><span class="">{{estimatedMilesEnd | number: '1.0-0'}}</span></div>
-      <div><label>Estimated Due (End of Contract): </label><span>{{estimatedExtraPayment | currency:'USD':'$':'1.0-0' }}</span></div>
-      <div><label>Percentage: </label><span class="">{{percentage | percent:'2.0-0'}}</span></div>
+      <div *ngIf="percentage > 1" style="color: red">You should park your car for&nbsp;<span class="large">{{daysToPause | number: '1.0-0'}}</span> days in order to stay under the miles limit</div>
+      <!--<app-gauge [value]="percentage" [rangeLow]="0" [rangeHigh]="1"></app-gauge>-->
     </div>
 
 
