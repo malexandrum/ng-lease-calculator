@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Select2OptionData } from 'ng2-select2';
-import { } from 'jquery';
 
 import { LEASEMONTHSOPTIONS } from './lease-months-options';
 import { COST_PER_MILE_OPTIONS } from './cost-per-mile-options';
 import { MILESPERYEAROPTIONS } from './miles-per-year-options'
+
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
 @Component({
   selector: 'app-root',
