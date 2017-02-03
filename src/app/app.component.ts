@@ -71,11 +71,13 @@ public lmos2: Array<Object>;
     if (this.leaseDateString) {
       this.leaseDate = new Date(this.leaseDateString);
     }
+    else {
+      return;
+    }
 
     this.ck = document.cookie;
 
     this.daysPassed = (+thisMoment - +this.leaseDate) / 1000 / 60 / 60 / 24;
-    console.log('days passed: ' + this.daysPassed);
     this.currentMilesLimit = this.daysPassed * this.milesPerYear / 365;
     this.estimatedMilesEnd = (this.leaseMonths * 30.4) * this.currentMiles / this.daysPassed;
     this.estimatedExtraPayment = (this.estimatedMilesEnd - this.milesPerYear * (this.leaseMonths / 12)) * this.costPerMile;
@@ -110,7 +112,7 @@ public lmos2: Array<Object>;
   setCookie(name: string, value: string, daysValid: number): void {
     let c = name + '=' + value;
     if (daysValid > 0) {
-      c += ';expires=' + new Date(+(new Date()) + daysValid * 24 * 60 * 60 * 1000);
+      c += ';expires=' + (new Date(+(new Date()) + daysValid * 24 * 60 * 60 * 1000)).toUTCString();
     }
     document.cookie = c;
   }
