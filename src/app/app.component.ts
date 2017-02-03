@@ -28,15 +28,18 @@ export class AppComponent implements OnInit {
   estimatedExtraPayment: number;
   percentage: number;
   editContractMode: boolean;
+  ck: string;
   // lmos = LEASEMONTHSOPTIONS;
   // costPerMileOptions = COST_PER_MILE_OPTIONS;
   // milesPerYearOptions = MILESPERYEAROPTIONS;
-  public lmos2: Array<Select2OptionData>;
-  public costPerMileOptions: Array<Select2OptionData>;
-  public milesPerYearOptions: Array<Select2OptionData>;
+  // public lmos2: Array<Select2OptionData>;
+  // public costPerMileOptions: Array<Select2OptionData>;
+  // public milesPerYearOptions: Array<Select2OptionData>;
+public lmos2: Array<Object>;
 
   constructor() {
     this.title = 'Auto Lease Miles Calculator';
+    this.ck = document.cookie;
 
     if (this.getCookie('leaseDate')) {
       this.leaseDateString = this.getCookie('leaseDate');
@@ -63,7 +66,11 @@ export class AppComponent implements OnInit {
   }
   onChange(): void {
     const thisMoment: Date = new Date();
-    this.leaseDate = new Date(this.leaseDateString);
+    if (this.leaseDateString) {
+      this.leaseDate = new Date(this.leaseDateString);
+    }
+
+    this.ck = document.cookie;
 
     this.daysPassed = (+thisMoment - +this.leaseDate) / 1000 / 60 / 60 / 24;
     console.log('days passed: ' + this.daysPassed);
@@ -90,6 +97,13 @@ export class AppComponent implements OnInit {
     if (this.leaseDate && this.leaseMonths && this.costPerMile && this.milesPerYear) {
       this.editContractMode = false;
     }
+  }
+  resetContract(): void {
+    this.leaseDateString = '';
+    this.leaseMonths = null;
+    this.costPerMile = null;
+    this.milesPerYear = null;
+    this.onChange();
   }
   setCookie(name: string, value: string, daysValid: number): void {
     let c = name + '=' + value;

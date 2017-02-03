@@ -58,6 +58,7 @@
       </div>
       <div>
         <button type="button" (click)="saveContract()" class="btn btn-primary">Save Contract</button>
+        <button type="button" (click)="resetContract()" class="btn">Reset Contract</button>
       </div><br>
     </div>
 
@@ -106,14 +107,13 @@
       <div *ngIf="percentage > 1" style="color: red">You should park your car for&nbsp;<span class="large">{{daysToPause | number: '1.0-0'}}</span> days in order to stay under
 the miles limit</div>
 
-<div>
-  DEBUG INFO:<br>
-  leaseDate: {{leaseDate}}<br>
-  leaseMonths: {{leaseMonths}}<br>
-  costPerMile: {{costPerMile}}<br>
-  milesPerYear: {{milesPerYear}}<br>
-</div>
+
 <!--<app-gauge [value]="percentage" [rangeLow]="0" [rangeHigh]="1"></app-gauge>-->
+</div>
+
+<div style="color: red;">
+  DEBUG INFO:<br> leaseDate: {{leaseDate}}<br> leaseMonths: {{leaseMonths}}<br> costPerMile: {{costPerMile}}<br> milesPerYear:
+  {{milesPerYear}}<br>cookie: {{ck}}
 </div>
 
 
