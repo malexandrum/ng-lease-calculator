@@ -88,7 +88,7 @@ public lmos2: Array<Object>;
       this.daysToPause = (this.estimatedMilesEnd - this.milesPerYear * this.leaseMonths / 12) / this.milesPerDay;
     }
 
-    if (typeof this.leaseDateString != 'undefinde') { this.setCookie('leaseDate', this.leaseDateString ? this.leaseDateString : '', 1825); }
+    if (typeof this.leaseDateString != 'undefined') { this.setCookie('leaseDate', this.leaseDateString ? this.leaseDateString : '', 1825); }
     if (typeof this.leaseMonths != 'undefined') { this.setCookie('leaseMonths', this.leaseMonths ? this.leaseMonths.toString() : '', 1825); }
     if (typeof this.costPerMile != 'undefined') { this.setCookie('costPerMile', this.costPerMile ? this.costPerMile.toString() : '', 1825); }
     if (typeof this.milesPerYear != 'undefined') { this.setCookie('milesPerYear', this.milesPerYear ? this.milesPerYear.toString() : '', 1825); }
