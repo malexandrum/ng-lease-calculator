@@ -5,18 +5,14 @@
   <form (change)="onChange()">
     <div id="contract-edit" *ngIf="editContractMode">
       <div class="form-group">
-        <label for="leaseDate">Lease Date
-      
-      </label>
+        <label for="leaseDate">Lease Date</label>
         <div class="input-group">
           <input class="form-control" [(ngModel)]="leaseDateString" id="leaseDate" type="date" [ngModelOptions]="{standalone: true}"
             placeholder="mm/dd/yyyy" />
-          <span class="input-group-addon">mm/dd/yyyy</span>
         </div>
       </div>
       <div class="form-group">
-        <label for="leaseMonths">Lease Months      
-      </label>
+        <label for="leaseMonths">Lease Months</label>
         <div class="input-group">
           <input class="form-control" id="leaseMonths" [(ngModel)]="leaseMonths" type="number" [ngModelOptions]="{standalone: true}"
             placeholder="Contract is for X months" /><span class="input-group-addon">months</span>
@@ -66,7 +62,7 @@
       <div>
         <label>Lease Date:     
         </label>
-        <span>{{leaseDateString}}</span>
+        <span>{{leaseDateString | date:short}}</span>
       </div>
       <div>
         <label>Lease Months:          
@@ -98,8 +94,8 @@
       </label>
       </div>
 
-      <div *ngIf="milesPerYear"><label>At end of contract you should be below&nbsp;</label><span class="">{{milesPerYear * leaseMonths / 12 | number: '1.0-0'}} miles</span></div>
-      <div *ngIf="estimatedMilesEnd"><label>Estimated at end of contract: </label><span class=""> {{estimatedMilesEnd | number: '1.0-0'}} miles</span></div>
+      <div *ngIf="milesPerYear"><label>Total paid miles miles:&nbsp;</label><span class="">{{milesPerYear * leaseMonths / 12 | number: '1.0-0'}}</span></div>
+      <div *ngIf="estimatedMilesEnd"><label>Estimated miles at end of contract: </label><span class=""> {{estimatedMilesEnd | number: '1.0-0'}}</span></div>
       <div *ngIf="estimatedExtraPayment > 0"><label>Extra payment estimated: </label><span> {{estimatedExtraPayment | currency:'USD':'$':'1.0-0' }}</span></div>
       <div *ngIf="percentage"><label>Percentage: </label><span class=""> {{percentage | percent:'1.0-0'}}</span></div>
       <div *ngIf="milesPerDay"><label>Average miles daily: </label><span class=""> {{milesPerDay | number:'1.0-0'}}</span></div>
