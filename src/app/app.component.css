@@ -25,3 +25,15 @@ h1 {
 label {
     font-style: normal !important;
 }
+
+.odometer-limit {
+    font-size: large;
+}
+
+.over-limit {
+    color: red;
+}
+
+.below-limit {
+    color: green;
+}

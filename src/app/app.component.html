@@ -7,14 +7,14 @@
       <div class="form-group">
         <label for="leaseDate">Lease Date</label>
         <div class="input-group">
-          <input class="form-control" [(ngModel)]="leaseDateString" id="leaseDate" type="date" [ngModelOptions]="{standalone: true}"
+          <input class="form-control large" [(ngModel)]="leaseDateString" id="leaseDate" type="date" [ngModelOptions]="{standalone: true}"
             placeholder="mm/dd/yyyy" />
         </div>
       </div>
       <div class="form-group">
         <label for="leaseMonths">Lease Months</label>
         <div class="input-group">
-          <input class="form-control" id="leaseMonths" [(ngModel)]="leaseMonths" type="number" [ngModelOptions]="{standalone: true}"
+          <input class="form-control large" id="leaseMonths" [(ngModel)]="leaseMonths" type="number" [ngModelOptions]="{standalone: true}"
             placeholder="Contract is for X months" /><span class="input-group-addon">months</span>
           <datalist id="lmos">
 
@@ -30,7 +30,7 @@
         </label>
         <div class="input-group">
           <span class="input-group-addon">$</span>
-          <input class="form-control" list="cpmos" id="costPerMile" [(ngModel)]="costPerMile" type="number" [ngModelOptions]="{standalone: true}"
+          <input class="form-control large" list="cpmos" id="costPerMile" [(ngModel)]="costPerMile" type="number" [ngModelOptions]="{standalone: true}"
             placeholder="Cost per mile" />
           <datalist id="cpmos">
             <option *ngFor="let cpmo of costPerMileOptions" value="{{cpmo.value}}">
@@ -44,7 +44,7 @@
         <label for="milesPerYear">Miles Per Year      
       </label>
         <div class="input-group">
-          <input class="form-control" list="milesPerYearOptions" id="milesPerYear" [(ngModel)]="milesPerYear" type="number" [ngModelOptions]="{standalone: true}"
+          <input class="form-control large" list="milesPerYearOptions" id="milesPerYear" [(ngModel)]="milesPerYear" type="number" [ngModelOptions]="{standalone: true}"
             placeholder="Contracted miles per year" />
           <span class="input-group-addon">miles</span>
           <datalist id="milesPerYearOptions">
@@ -87,31 +87,32 @@
       <div class="form-group">
         <label>Odometer Reading
         <div class="input-group">
-      <input class="form-control" [(ngModel)]="currentMiles" #odometerReading type="number" [ngModelOptions]="{standalone: true}" placeholder="Current miles"
+      <input class="form-control large" [(ngModel)]="currentMiles" #odometerReading type="number" [ngModelOptions]="{standalone: true}" placeholder="Current miles"
       />
       <span class="input-group-addon">miles</span>
       </div>
       </label>
       </div>
 
-      <div *ngIf="milesPerYear"><label>Total paid miles miles:&nbsp;</label><span class="">{{milesPerYear * leaseMonths / 12 | number: '1.0-0'}}</span></div>
-      <div *ngIf="estimatedMilesEnd"><label>Estimated miles at end of contract: </label><span class=""> {{estimatedMilesEnd | number: '1.0-0'}}</span></div>
+      <div *ngIf="currentMilesLimit" class="odometer-limit" [class.over-limit]="percentage > 1" [class.below-limit]="percentage < 1"><label>Should be below:</label><span> {{currentMilesLimit | number: '1.0-0'}}</span></div>
+      <!--<div *ngIf="milesPerYear"><label>Total paid miles:&nbsp;</label><span class="">{{milesPerYear * leaseMonths / 12 | number: '1.0-0'}}</span></div>-->
+      <div *ngIf="estimatedMilesEnd"><label>Estimated miles: </label><span class=""> {{estimatedMilesEnd | number: '1.0-0'}}</span></div>
       <div *ngIf="estimatedExtraPayment > 0"><label>Extra payment estimated: </label><span> {{estimatedExtraPayment | currency:'USD':'$':'1.0-0' }}</span></div>
       <div *ngIf="percentage"><label>Percentage: </label><span class=""> {{percentage | percent:'1.0-0'}}</span></div>
       <div *ngIf="milesPerDay"><label>Average miles daily: </label><span class=""> {{milesPerDay | number:'1.0-0'}}</span></div>
 
-      <div *ngIf="percentage > 1" style="color: red">You should park your car for&nbsp;<span class="large">{{daysToPause | number: '1.0-0'}}</span> days in order to stay under
-the miles limit</div>
+      <div *ngIf="percentage > 1" style="color: red">You should park your car for&nbsp;<span class="large">{{daysToPause | number: '1.0-0'}}</span> days in order to stay
+        under the miles limit</div>
 
 
-<!--<app-gauge [value]="percentage" [rangeLow]="0" [rangeHigh]="1"></app-gauge>-->
-</div>
+      <!--<app-gauge [value]="percentage" [rangeLow]="0" [rangeHigh]="1"></app-gauge>-->
+    </div>
 
-<!--<div style="color: red;">
+    <!--<div style="color: red;">
   DEBUG INFO:<br> leaseDate: {{leaseDate}}<br> leaseMonths: {{leaseMonths}}<br> costPerMile: {{costPerMile}}<br> milesPerYear:
   {{milesPerYear}}<br>cookie: {{ck}}
 </div>-->
 
 
-</form>
+  </form>
 </div>

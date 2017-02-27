@@ -22,22 +22,23 @@ export class AppComponent implements OnInit {
   costPerMile: number;
   milesPerYear: number;
   currentMiles: number;
+  currentMilesLimit: number;
   daysPassed: number;
   milesPerDay: number;
   daysToPause: number;
-  currentMilesLimit: number;
   estimatedMilesEnd: number;
   estimatedExtraPayment: number;
   percentage: number;
   editContractMode: boolean;
   ck: string;
+  odometerStyles: {};
   // lmos = LEASEMONTHSOPTIONS;
   // costPerMileOptions = COST_PER_MILE_OPTIONS;
   // milesPerYearOptions = MILESPERYEAROPTIONS;
   // public lmos2: Array<Select2OptionData>;
   // public costPerMileOptions: Array<Select2OptionData>;
   // public milesPerYearOptions: Array<Select2OptionData>;
-public lmos2: Array<Object>;
+  public lmos2: Array<Object>;
 
   constructor() {
     this.title = 'Auto Lease Miles Calculator';
@@ -46,6 +47,7 @@ public lmos2: Array<Object>;
     if (this.getCookie('leaseDate')) {
       this.leaseDateString = this.getCookie('leaseDate');
       this.leaseDate = new Date(this.leaseDateString);
+      this.daysPassed = (+(new Date()) - +this.leaseDate) / 1000 / 60 / 60 / 24;
     }
     if (this.getCookie('leaseMonths')) {
       this.leaseMonths = +this.getCookie('leaseMonths');
@@ -64,12 +66,17 @@ public lmos2: Array<Object>;
       this.editContractMode = false;
     }
 
+    if (this.leaseDate && this.milesPerYear) {
+      this.currentMilesLimit = this.daysPassed / 365 * this.milesPerYear;
+    }
+
 
   }
   onChange(): void {
     const thisMoment: Date = new Date();
     if (this.leaseDateString) {
       this.leaseDate = new Date(this.leaseDateString);
+      this.daysPassed = (+(new Date()) - +this.leaseDate) / 1000 / 60 / 60 / 24;
     }
     else {
       return;
@@ -78,15 +85,22 @@ public lmos2: Array<Object>;
     this.ck = document.cookie;
 
     this.daysPassed = (+thisMoment - +this.leaseDate) / 1000 / 60 / 60 / 24;
-    this.currentMilesLimit = this.daysPassed * this.milesPerYear / 365;
-    this.estimatedMilesEnd = (this.leaseMonths * 30.4) * this.currentMiles / this.daysPassed;
-    this.estimatedExtraPayment = (this.estimatedMilesEnd - this.milesPerYear * (this.leaseMonths / 12)) * this.costPerMile;
-    this.percentage = this.currentMiles / this.currentMilesLimit;
-    this.milesPerDay = this.currentMiles / this.daysPassed;
-    if (this.percentage > 1) {
-      // this.daysToPause = this.leaseMonths * 30 - this.daysPassed - ()
-      this.daysToPause = (this.estimatedMilesEnd - this.milesPerYear * this.leaseMonths / 12) / this.milesPerDay;
+    if (this.milesPerYear) {
+      this.currentMilesLimit = this.daysPassed * this.milesPerYear / 365;
     }
+    if (this.leaseMonths && this.costPerMile) {
+      this.estimatedMilesEnd = (this.leaseMonths * 30.4) * this.currentMiles / this.daysPassed;
+      this.estimatedExtraPayment = (this.estimatedMilesEnd - this.milesPerYear * (this.leaseMonths / 12)) * this.costPerMile;
+    }
+    if (this.currentMiles) {
+      this.percentage = this.currentMiles / this.currentMilesLimit;
+      this.milesPerDay = this.currentMiles / this.daysPassed;
+      if (this.percentage > 1) {
+        // this.daysToPause = this.leaseMonths * 30 - this.daysPassed - ()
+        this.daysToPause = (this.estimatedMilesEnd - this.milesPerYear * this.leaseMonths / 12) / this.milesPerDay;
+      }
+    }
+
 
     if (typeof this.leaseDateString != 'undefined') { this.setCookie('leaseDate', this.leaseDateString ? this.leaseDateString : '', 1825); }
     if (typeof this.leaseMonths != 'undefined') { this.setCookie('leaseMonths', this.leaseMonths ? this.leaseMonths.toString() : '', 1825); }
