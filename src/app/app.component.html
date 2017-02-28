@@ -2,19 +2,19 @@
   <h3>
     <span class="glyphicon glyphicon-road"></span> {{title}}
   </h3>
-  <form (change)="onChange()">
+  <form (change)="onChange()" #f1="ngForm">
     <div id="contract-edit" *ngIf="editContractMode">
       <div class="form-group">
         <label for="leaseDate">Lease Date</label>
-        <div class="input-group">
-          <input class="form-control large" [(ngModel)]="leaseDateString" id="leaseDate" type="date" [ngModelOptions]="{standalone: true}"
+        <div class="input-group input-group-lg">
+          <input class="form-control" [(ngModel)]="leaseDateString" id="leaseDate" type="date" [ngModelOptions]="{standalone: true}"
             placeholder="mm/dd/yyyy" />
         </div>
       </div>
       <div class="form-group">
         <label for="leaseMonths">Lease Months</label>
-        <div class="input-group">
-          <input class="form-control large" id="leaseMonths" [(ngModel)]="leaseMonths" type="number" [ngModelOptions]="{standalone: true}"
+        <div class="input-group input-group-lg">
+          <input class="form-control" id="leaseMonths" [(ngModel)]="leaseMonths" type="number" [ngModelOptions]="{standalone: true}"
             placeholder="Contract is for X months" /><span class="input-group-addon">months</span>
           <datalist id="lmos">
 
@@ -28,9 +28,9 @@
       <div class="form-group">
         <label for="costPerMile">Cost Per Extra Mile      
         </label>
-        <div class="input-group">
+        <div class="input-group input-group-lg">
           <span class="input-group-addon">$</span>
-          <input class="form-control large" list="cpmos" id="costPerMile" [(ngModel)]="costPerMile" type="number" [ngModelOptions]="{standalone: true}"
+          <input class="form-control" list="cpmos" id="costPerMile" [(ngModel)]="costPerMile" type="number" [ngModelOptions]="{standalone: true}"
             placeholder="Cost per mile" />
           <datalist id="cpmos">
             <option *ngFor="let cpmo of costPerMileOptions" value="{{cpmo.value}}">
@@ -43,8 +43,8 @@
       <div class="form-group">
         <label for="milesPerYear">Miles Per Year      
       </label>
-        <div class="input-group">
-          <input class="form-control large" list="milesPerYearOptions" id="milesPerYear" [(ngModel)]="milesPerYear" type="number" [ngModelOptions]="{standalone: true}"
+        <div class="input-group input-group-lg">
+          <input class="form-control" list="milesPerYearOptions" id="milesPerYear" [(ngModel)]="milesPerYear" type="number" [ngModelOptions]="{standalone: true}"
             placeholder="Contracted miles per year" />
           <span class="input-group-addon">miles</span>
           <datalist id="milesPerYearOptions">
@@ -86,8 +86,8 @@
 
       <div class="form-group">
         <label>Odometer Reading
-        <div class="input-group">
-      <input class="form-control large" [(ngModel)]="currentMiles" #odometerReading type="number" [ngModelOptions]="{standalone: true}" placeholder="Current miles"
+        <div class="input-group input-group-lg">
+      <input class="form-control" [(ngModel)]="currentMiles" #odometerReading type="number" [ngModelOptions]="{standalone: true}" placeholder="Current miles"
       />
       <span class="input-group-addon">miles</span>
       </div>
@@ -105,13 +105,13 @@
         under the miles limit</div>
 
 
+
       <!--<app-gauge [value]="percentage" [rangeLow]="0" [rangeHigh]="1"></app-gauge>-->
     </div>
 
-    <!--<div style="color: red;">
-  DEBUG INFO:<br> leaseDate: {{leaseDate}}<br> leaseMonths: {{leaseMonths}}<br> costPerMile: {{costPerMile}}<br> milesPerYear:
-  {{milesPerYear}}<br>cookie: {{ck}}
-</div>-->
+    <div style="color: red;">
+      DEBUG INFO:<br> {{f1.className}}
+    </div>
 
 
   </form>

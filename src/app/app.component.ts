@@ -108,6 +108,12 @@ export class AppComponent implements OnInit {
     if (typeof this.milesPerYear != 'undefined') { this.setCookie('milesPerYear', this.milesPerYear ? this.milesPerYear.toString() : '', 1825); }
 
   }
+  increaseCurrentMiles(): void {
+    this.currentMiles += 10;
+  }
+  decreaseCurrentMiles(): void {
+    this.currentMiles += 10;
+  }
   editContract(): void {
     this.editContractMode = true;
   }
@@ -117,11 +123,13 @@ export class AppComponent implements OnInit {
     }
   }
   resetContract(): void {
-    this.leaseDateString = '';
-    this.leaseMonths = null;
-    this.costPerMile = null;
-    this.milesPerYear = null;
-    this.onChange();
+    if (confirm('Are you sure want to reset the contract?')) {
+      this.leaseDateString = '';
+      this.leaseMonths = null;
+      this.costPerMile = null;
+      this.milesPerYear = null;
+      this.onChange();
+    }
   }
   setCookie(name: string, value: string, daysValid: number): void {
     let c = name + '=' + value;
