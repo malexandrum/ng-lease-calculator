@@ -87,9 +87,18 @@
       <div class="form-group">
         <label>Odometer Reading
         <div class="input-group input-group-lg">
-      <input class="form-control" [(ngModel)]="currentMiles" #odometerReading type="number" [ngModelOptions]="{standalone: true}" placeholder="Current miles"
+          <div class="input-group-btn">
+            <button type="button" class="btn" (click)="decreaseCurrentMiles(50)">-50</button>
+            <button type="button" class="btn" (click)="decreaseCurrentMiles(10)">-10</button>
+          </div>
+      <input class="form-control" [(ngModel)]="currentMiles" #odometerReading type="number" [ngModelOptions]="{standalone: true}" placeholder="Miles"
       />
-      <span class="input-group-addon">miles</span>
+      <div class="input-group-btn">
+            <button type="button" class="btn" (click)="increaseCurrentMiles(10)">+10</button>
+                        <button type="button" class="btn" (click)="increaseCurrentMiles(50)">+50</button>
+
+          </div>
+      <!--<span class="input-group-addon">miles</span>-->
       </div>
       </label>
       </div>
@@ -109,9 +118,9 @@
       <!--<app-gauge [value]="percentage" [rangeLow]="0" [rangeHigh]="1"></app-gauge>-->
     </div>
 
-    <div style="color: red;">
+    <!--<div style="color: red;">
       DEBUG INFO:<br> {{f1.className}}
-    </div>
+    </div>-->
 
 
   </form>

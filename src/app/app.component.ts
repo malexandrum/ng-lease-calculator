@@ -108,11 +108,19 @@ export class AppComponent implements OnInit {
     if (typeof this.milesPerYear != 'undefined') { this.setCookie('milesPerYear', this.milesPerYear ? this.milesPerYear.toString() : '', 1825); }
 
   }
-  increaseCurrentMiles(): void {
-    this.currentMiles += 10;
+  increaseCurrentMiles(miles:number): void {
+    if (!this.currentMiles) {
+      this.currentMiles = Math.round(this.currentMilesLimit / miles) * miles;
+    }
+    this.currentMiles += miles;
+    this.onChange();
   }
-  decreaseCurrentMiles(): void {
-    this.currentMiles += 10;
+  decreaseCurrentMiles(miles: number): void {
+    if (!this.currentMiles) {
+      this.currentMiles = Math.round(this.currentMilesLimit / miles) * miles;
+    }
+    this.currentMiles -= miles;
+    this.onChange();
   }
   editContract(): void {
     this.editContractMode = true;
