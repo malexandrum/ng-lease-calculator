@@ -92,29 +92,32 @@
           
         <input class="form-control" [(ngModel)]="currentMiles" #odometerReading type="number" [ngModelOptions]="{standalone: true}" placeholder="Miles"
         />
+        <!--<span class="input-group-addon">miles</span>-->
+
         <div>
           <button type="button" class="btn btn-primary" (click)="decreaseCurrentMiles(50)">-50</button>
           <button type="button" class="btn" (click)="decreaseCurrentMiles(10)">-10</button>
-        <!--</div>
-        <div class="input-group-btn">-->
+               
           <button type="button" class="btn" (click)="increaseCurrentMiles(10)">+10</button>
           <button type="button" class="btn btn-primary" (click)="increaseCurrentMiles(50)">+50</button>
         </div>
-      </div>
-        <!--<div class="input-group-btn">-->
-          
+    
+          </div>
+
+
         </label>
         
-
-        <!--<span class="input-group-addon">miles</span>-->
+        
 
       </div>
 
       <div *ngIf="currentMilesLimit" class="odometer-limit" [class.over-limit]="percentage > 1" [class.below-limit]="percentage < 1"><label>Should be below:</label><span> {{currentMilesLimit | number: '1.0-0'}}</span></div>
       <!--<div *ngIf="milesPerYear"><label>Total paid miles:&nbsp;</label><span class="">{{milesPerYear * leaseMonths / 12 | number: '1.0-0'}}</span></div>-->
+      
+      <div class="odometer-limit" *ngIf="percentage"><label>Percentage: </label><span class=""> {{percentage | percent:'1.0-0'}}</span></div>
       <div *ngIf="estimatedMilesEnd"><label>Estimated miles: </label><span class=""> {{estimatedMilesEnd | number: '1.0-0'}}</span></div>
       <div *ngIf="estimatedExtraPayment > 0"><label>Extra payment estimated: </label><span> {{estimatedExtraPayment | currency:'USD':'$':'1.0-0' }}</span></div>
-      <div *ngIf="percentage"><label>Percentage: </label><span class=""> {{percentage | percent:'1.0-0'}}</span></div>
+      
       <div *ngIf="milesPerDay"><label>Average miles daily: </label><span class=""> {{milesPerDay | number:'1.0-0'}}</span></div>
 
       <div *ngIf="percentage > 1" style="color: red">You should park your car for&nbsp;<span class="large">{{daysToPause | number: '1.0-0'}}</span> days in order to stay
