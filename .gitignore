@@ -4,6 +4,9 @@
 # /dist
 /tmp
 
+# AWS secrets
+aws.json
+
 # dependencies
 /node_modules
 

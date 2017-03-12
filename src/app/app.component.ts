@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Select2OptionData } from 'ng2-select2';
+// import { Select2OptionData } from 'ng2-select2';
 
 import { LEASEMONTHSOPTIONS } from './lease-months-options';
 import { COST_PER_MILE_OPTIONS } from './cost-per-mile-options';
